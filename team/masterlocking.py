@@ -74,21 +74,21 @@ def lock_master_forms(employee):
     dict['today_date'] = today_date;
     dict['current_time'] = current_time;
     
-    dict['lock_T_Obj1'] = lock_pro[0].m_pro;
-    dict['lock_T_Obj2'] = lock_pat[0].m_pat;
-    dict['lock_T_Obj'] = lock_doc[0].m_doc;
+    dict['lock_T_Obj1'] = t_obj1[0].obj_frm_date;
+    dict['lock_T_Obj2'] = t_obj2[0].obj_to_date;
+    dict['lock_T_Obj'] = t_obj[0].obj_time;
     
-    dict['lock_T_DrC1'] = lock_che[0].m_che;    
-    dict['lock_T_DrC2'] = lock_pro[0].m_pro;
-    dict['lock_T_DrC'] = lock_pat[0].m_pat;
+    dict['lock_T_DrC1'] = t_drc1[0].doc_frm_date;    
+    dict['lock_T_DrC2'] = t_drc2[0].doc_to_date;
+    dict['lock_T_DrC'] = t_drc[0].doc_time;
     
-    dict['lock_T_ChC1'] = lock_doc[0].m_doc;
-    dict['lock_T_ChC2'] = lock_che[0].m_che;    
-    dict['lock_T_ChC'] = lock_pro[0].m_pro;
+    dict['lock_T_ChC1'] = t_chc1[0].che_frm_date;
+    dict['lock_T_ChC2'] = t_chc2[0].che_to_date;    
+    dict['lock_T_ChC'] = t_chc[0].che_time;
     
-    dict['lock_T_CmC1'] = lock_pat[0].m_pat;
-    dict['lock_T_CmC2'] = lock_doc[0].m_doc;
-    dict['lock_T_CmC'] = lock_che[0].m_che;
+    dict['lock_T_CmC1'] = t_cmc1[0].cam_frm_date;
+    dict['lock_T_CmC2'] = t_cmc2[0].cam_to_date;
+    dict['lock_T_CmC'] = t_cmc[0].cam_time;
     
     return dict
          
