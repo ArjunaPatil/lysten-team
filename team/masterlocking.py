@@ -38,33 +38,31 @@ def lock_master_forms(employee):
     lock_doc = frappe.db.sql(""" select m_doc from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
     lock_che = frappe.db.sql(""" select m_che from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
     
-    frmdate,todate,locktime = frappe.db.sql(""" select ifnull(t_obj1,'')as obj_frm_date,ifnull(t_obj2,'')as obj_to_date,ifnull(t_obj_time,'')as obj_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    t_obj1,t_obj2,t_obj = frappe.db.sql(""" select ifnull(t_obj1,'')as obj_frm_date,ifnull(t_obj2,'')as obj_to_date,ifnull(t_obj_time,'')as obj_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
     
-    frmdate,todate,locktime = frappe.db.sql(""" select ifnull(t_drc1,'')as doc_frm_date,ifnull(t_drc2,'')as doc_to_date,ifnull(t_drc_time,'')as doc_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    t_drc1,t_drc2,t_drc = frappe.db.sql(""" select ifnull(t_drc1,'')as doc_frm_date,ifnull(t_drc2,'')as doc_to_date,ifnull(t_drc_time,'')as doc_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
     
-    frmdate,todate,locktime = frappe.db.sql(""" select ifnull(t_chc1,'')as che_frm_date,ifnull(t_chc2,'')as che_to_date,ifnull(t_chc_time,'')as che_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    t_chc1,t_chc2,t_chc = frappe.db.sql(""" select ifnull(t_chc1,'')as che_frm_date,ifnull(t_chc2,'')as che_to_date,ifnull(t_chc_time,'')as che_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
     
-    frmdate,todate,locktime = frappe.db.sql(""" select ifnull(t_cmc1,'')as cam_frm_date,ifnull(t_cmc2,'')as cam_to_date,ifnull(t_cmc_time,'')as cam_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    t_cmc1,t_cmc2,t_cmc = frappe.db.sql(""" select ifnull(t_cmc1,'')as cam_frm_date,ifnull(t_cmc2,'')as cam_to_date,ifnull(t_cmc_time,'')as cam_time from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
     
     dict = {'lock_pro': '',
             'lock_pat': '',
             'lock_doc':'',
-            'lock_che': '',
-            
+            'lock_che': '',            
             'today_date': '',
-            'current_time': '',
-            
+            'current_time': '',            
+            'lock_T_Obj1': '',
+            'lock_T_Obj2': '',
             'lock_T_Obj': '',
+            'lock_T_DrC1': '',
+            'lock_T_DrC2': '',
             'lock_T_DrC': '',
+            'lock_T_ChC1': '',
+            'lock_T_ChC2': '',
             'lock_T_ChC': '',
-            'lock_T_CmC': '',
-            'lock_T_Obj': '',
-            'lock_T_DrC': '',
-            'lock_T_ChC': '',
-            'lock_T_CmC': '',
-            'lock_T_Obj': '',
-            'lock_T_DrC': '',
-            'lock_T_ChC': '',
+            'lock_T_CmC1': '',
+            'lock_T_CmC2': '',
             'lock_T_CmC': ''
            }
     
@@ -72,8 +70,25 @@ def lock_master_forms(employee):
     dict['lock_pat'] = lock_pat[0].m_pat;
     dict['lock_doc'] = lock_doc[0].m_doc;
     dict['lock_che'] = lock_che[0].m_che;
-    dict['lock_che'] = lock_che[0].m_che;
-    dict['lock_che'] = lock_che[0].m_che;
+    
+    dict['today_date'] = today_date;
+    dict['current_time'] = current_time;
+    
+    dict['lock_T_Obj1'] = lock_pro[0].m_pro;
+    dict['lock_T_Obj2'] = lock_pat[0].m_pat;
+    dict['lock_T_Obj'] = lock_doc[0].m_doc;
+    
+    dict['lock_T_DrC1'] = lock_che[0].m_che;    
+    dict['lock_T_DrC2'] = lock_pro[0].m_pro;
+    dict['lock_T_DrC'] = lock_pat[0].m_pat;
+    
+    dict['lock_T_ChC1'] = lock_doc[0].m_doc;
+    dict['lock_T_ChC2'] = lock_che[0].m_che;    
+    dict['lock_T_ChC'] = lock_pro[0].m_pro;
+    
+    dict['lock_T_CmC1'] = lock_pat[0].m_pat;
+    dict['lock_T_CmC2'] = lock_doc[0].m_doc;
+    dict['lock_T_CmC'] = lock_che[0].m_che;
     
     return dict
          
