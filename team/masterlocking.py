@@ -6,27 +6,37 @@ from frappe import msgprint, _
 __version__ = '0.0.1'
 
 @frappe.whitelist()
-def lock_master_forms(employee,formname):
-    lock_flag=0
-    if(formname == 'profile'):
-        lock_flag = frappe.db.sql("""select m_pro from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
-        return lock_flag
-
-    elif formname == "patch":
-         lock_flag = frappe.db.sql(""" select m_pat from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
-         return lock_flag
-
-    elif formname == "doctor":
-        lock_flag = frappe.db.sql(""" select m_doc from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
-        return lock_flag
-
-    elif formname == "chemist":
-         lock_flag = frappe.db.sql(""" select m_che from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
-         return lock_flag
-
-    else:
-        return lock_flag
-
+def lock_master_forms(employee):
+    
+    lock_pro=0
+    lock_pat=0
+    lock_doc=0
+    lock_che=0
+    
+    lock_pro = frappe.db.sql("""select m_pro from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    lock_pat = frappe.db.sql(""" select m_pat from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    lock_doc = frappe.db.sql(""" select m_doc from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    lock_che = frappe.db.sql(""" select m_che from 1bd3e0294da19198.`tabUser` where name= {0} """.format(employee), as_dict=1)
+    
+    dict = {'lock_pro': '',
+            'lock_pat': '',
+            'lock_doc':'',
+            'lock_che': '',
+            'lock_T_Obj': '',
+            'lock_T_DrC': '',
+            'lock_T_ChC': '',
+            'lock_T_CmC': ''   
+           }
+    
+    dict['cnt_emp_objective'] = lock_pro[0].m_pro;
+    dict['cnt_of_emp_dcr'] = lock_pat[0].m_pat;
+    dict['cnt_of_emp_chem'] = lock_doc[0].m_doc;
+    dict['cnt_of_emp_camp'] = lock_che[0].m_che;
+    
+    return dict
+    
+    
+    
 def lock_transaction_forms(employee,formname,date):
     lock_flag=0
     frmdate=""
