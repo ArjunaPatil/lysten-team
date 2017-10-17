@@ -18,15 +18,7 @@ def get_plan_of_today(employee, designation,date_pass,app_ver):
   today_date=date_pass
   
  today_date="'"+today_date+"'"
- for email_emp in tree_user_bottom(employee, designation):
-  email_list = email_list + "'"+email_emp.name + "',"
-  count_of_emp=count_of_emp+1
-  if(email_emp.designation =='TBM'):
-   email_list_only_TBM=email_list_only_TBM + "'"+email_emp.name + "',"
-   count_of_emp_tbm=count_of_emp_tbm+1
-  
- email_list=email_list[:-1]
- email_list_only_TBM=email_list_only_TBM[:-1]
+
  
  
   objective= frappe.db.sql(""" SELECT doctor_flag as dc,camp_flag as cm,meeting_flag as mt,leave_flag as lv,call_agenda as dc_a,
